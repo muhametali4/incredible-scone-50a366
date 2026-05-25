@@ -42,7 +42,6 @@
     </div>
 
     <script>
-        // Tüm Projelerin Veri Havuzu
         const projects = {
             "1": {
                 title: "Klasik Affresco",
@@ -85,16 +84,56 @@
                 img: "resimler/duvar7.jpg",
                 materials: "Tekstürlü Sıva, Efekt Boya",
                 process: "Yaşam alanlarına karakter katan modern ve yoğun dokulu yüzey çalışması."
+            },
+            "8": {
+                title: "Doğal Taş Dokusu",
+                img: "resimler/duvar8.jpg",
+                materials: "Kireç Taşı Tozu, Mineral Katkılı Harç",
+                process: "Doğal mermer bloklarının organik dokusunu ve damarlı yapısını taklit eden özel İtalyan sıva tekniği."
+            },
+            "9": {
+                title: "Endüstriyel Beton",
+                img: "resimler/duvar9.jpg",
+                materials: "Mikroçimento, Beton Efekt Boyası",
+                process: "Modern ve loft mekanlar için ham beton görünümünün pürüzsüz bir dokuyla yüzeye işlenmesi."
+            },
+            "10": {
+                title: "Metalik Yansımalar",
+                img: "resimler/duvar10.jpg",
+                materials: "Metalik Pigmentler, Oksit Efektleri",
+                process: "Zamanla oksitlenmiş metal ve bronz plakaların estetik renk geçişlerini sunan sanatsal uygulama."
+            },
+            "11": {
+                title: "Rustik Akdeniz",
+                img: "resimler/duvar11.jpg",
+                materials: "Kalın Kumlu Harç, Toprak Pigmentleri",
+                process: "Akdeniz mimarisinin sıcak, samimi ve kaba dokulu köy evi duvarlarını modern iç mekanlara taşıyan çalışma."
+            },
+            "12": {
+                title: "Geometrik Rölyef",
+                img: "resimler/duvar12.jpg",
+                materials: "MDF Panel, Macun, Derz Dolgusu",
+                process: "Işık ve gölge oyunlarıyla derinlik kazanan, modern mimari çizgilerden ilham alan geometrik kabartma duvar sanatı."
+            },
+            "13": {
+                title: "Venedik Sıvası",
+                img: "resimler/duvar13.jpg",
+                materials: "Mermer Unu Esaslı Macun, Parlatıcı Cila",
+                process: "Çok ince katmanlar halinde spatula ile çekilen, kuruduktan sonra mermer gibi parlayan yüksek kaliteli klasik İtalyan kaplama."
+            },
+            "14": {
+                title: "Özel Tasarım Mural",
+                img: "resimler/duvar14.jpg",
+                materials: "Multisurface Boyalar, Detay Fırçaları",
+                process: "Mekanın ruhuna ve mobilya konseptine uygun olarak sıfırdan tasarlanan ve duvara işlenen özgün sanatsal kompozisyon."
             }
         };
 
-        // URL'den hangi projenin istendiğini bulma (örn: detay.html?id=4)
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
         const project = projects[projectId];
 
         if(project) {
-            // Verileri HTML elementlerine yerleştirme
             document.getElementById('project-img-tag').src = project.img;
             document.getElementById('project-img-tag').alt = project.title;
             document.getElementById('project-title').innerText = project.title;
@@ -104,7 +143,6 @@
             document.getElementById('project-title').innerText = "Proje Bulunamadı";
         }
 
-        // Sayfa Yüklenme Animasyon Kontrolü
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
