@@ -4,121 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proje Detayı | Affresco Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #fcfbf7; color: #333; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-
-        /* Şık Yükleme Ekranı */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background-color: #1a1a1a; display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 0.8s ease;
-        }
-        .spinner {
-            width: 50px; height: 50px; border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 50%; border-top-color: #8e7f68; animation: spin 1s ease-in-out infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Sayfa İçeriği Alanı */
-        #content { opacity: 0; transition: opacity 1s ease; padding: 40px 10%; }
-
-        /* Geri Dön Butonu (Artık beyaz zeminde siyah duruyor) */
-        .back-btn {
-            display: inline-block; margin-bottom: 30px;
-            color: #333; text-decoration: none; font-size: 1.1rem;
-            font-weight: 600; transition: 0.3s ease;
-        }
-        .back-btn:hover { color: #8e7f68; transform: translateX(-5px); }
-
-        /* Profesyonel Galeri Çerçevesi */
-        .portfolio-container {
-            max-width: 1100px; margin: 0 auto;
-            background: white; padding: 50px;
-            border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        
-        .portfolio-container h1 { 
-            text-align: center; font-size: 2.8rem; 
-            margin-bottom: 40px; color: #1a1a1a; 
-        }
-
-        /* Görselin Yırtılmadan/Bozulmadan Sergilendiği Alan */
-        .image-wrapper { 
-            text-align: center; margin-bottom: 50px; 
-        }
-        .image-wrapper img {
-            max-width: 100%; /* Kendi boyutunu aşmasını engeller */
-            max-height: 65vh; /* Ekrana sığdırır */
-            border-radius: 8px; /* Hafif oval köşeler */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2); /* Şık bir derinlik gölgesi */
-            object-fit: contain; /* RESMİ ASLA KESMEZ VE BOZMAZ */
-        }
-
-        /* Bilgi Kutuları */
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .info-box h3 { color: #8e7f68; font-size: 1.5rem; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .info-box p { font-size: 1.05rem; line-height: 1.8; color: #555; }
-
-        /* Mobilde Güzel Durması İçin */
-        @media (max-width: 768px) {
-            .info-grid { grid-template-columns: 1fr; }
-            .portfolio-container { padding: 30px 20px; }
-            #content { padding: 20px 5%; }
-            .portfolio-container h1 { font-size: 2rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="loader"><div class="spinner"></div></div>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
 
-    <div id="content">
-        <a href="index.html" class="back-btn">← Koleksiyona Dön</a>
-        
-        <div class="portfolio-container">
-            <h1 id="project-title">Yükleniyor...</h1>
-            
-            <div class="image-wrapper">
-                <img id="project-img-tag" src="" alt="Affresco Studio Duvar Sanatı">
-            </div>
-            
-            <div class="info-grid">
-                <div class="info-box">
-                    <h3>Kullanılan Malzemeler</h3>
-                    <p id="project-materials">Veriler yükleniyor...</p>
+    <div id="content" style="opacity: 0;">
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">AFFRESCO <span>STUDIO</span></div>
+            <ul>
+                <li><a href="index.html#koleksiyon">Koleksiyona Dön</a></li>
+            </ul>
+        </nav>
+
+        <section class="project-detail-section section-padding">
+            <div class="detail-container">
+                <div class="detail-img-box">
+                    <img id="project-img-tag" src="" alt="Proje Görseli">
                 </div>
-                <div class="info-box">
-                    <h3>Yapım Aşaması</h3>
-                    <p id="project-process">Veriler yükleniyor...</p>
+                <div class="detail-info-box">
+                    <h1 id="project-title">Proje Yükleniyor...</h1>
+                    <div class="info-item">
+                        <h3>Kullanılan Malzemeler</h3>
+                        <p id="project-materials">-</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Yapım Aşaması / Hikayesi</h3>
+                        <p id="project-process">-</p>
+                    </div>
+                    <a href="index.html#koleksiyon" class="btn">Geri Dön</a>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
+        // Tüm Projelerin Veri Havuzu
         const projects = {
-            1: { img: 'resimler/duvar1.jpg', title: 'Klasik Affresco', materials: 'İtalyan sıvası, doğal mineral pigment, mermer tozu.', process: 'Önce yüzey pürüzsüzleştirildi. Ardından 3 kat sıva çekilerek doğal oksitlenme işlemiyle doku kazandırıldı.' },
-            2: { img: 'resimler/duvar2.jpg', title: 'Modern Sanat', materials: 'Brüt beton astarı, akrilik rölyef, mat cila.', process: 'Mala kullanılarak geometrik dokular oluşturuldu. Gölge efektleri için son kat boya tekniği uygulandı.' },
-            3: { img: 'resimler/duvar3.jpg', title: 'Antik Doku', materials: 'Eskitme pudrası, traverten tozu, su bazlı koruyucu.', process: 'Duvara doğal yaşlanma efekti vermek için süngerleme tekniği kullanıldı ve son olarak mat cila atıldı.' },
-            4: { img: 'resimler/duvar4.jpg', title: 'Altın Dokunuş', materials: '24K imitasyon altın varak, özel varak tutkalı, epoksi reçine.', process: 'Zemin koyu renge boyandıktan sonra altın varaklar tek tek işlendi ve üzeri reçine ile mühürlendi.' },
-            5: { img: 'resimler/duvar5.jpg', title: 'Gece ve Altın', materials: 'Mat siyah endüstriyel boya, altın yaldız tozu.', process: 'Siyah zemin üzerine fırça darbeleriyle altın damarlar çekildi, derinlik hissi yaratıldı.' },
-            6: { img: 'resimler/duvar6.jpg', title: 'Doğal Endüstriyel', materials: 'Mikro çimento, doğal yosun efekti boyası.', process: 'Beton dökümü kuruduktan sonra, asidik tepkimelerle duvarda doğal yosunlama ve yıpranma izleri oluşturuldu.' },
-            7: { img: 'resimler/duvar7.jpg', title: 'Oryantal İşleme', materials: 'Özel kesim şablon (stencil), 3D rölyef pastası.', process: 'Şablon duvara sabitlendi, üzerinden kabartma pastası geçildi. Kuruduktan sonra antika patinası uygulandı.' },
-            8: { img: 'resimler/duvar8.jpg', title: 'Heykelimsi Rölyef', materials: 'Şekillendirilebilir heykeltıraş alçısı, fiberglas file.', process: 'Duvarda elle yontularak 3 boyutlu derinlik sağlandı. Aydınlatma ile gölgeler belirginleştirildi.' },
-            9: { img: 'resimler/duvar9.jpg', title: 'Modern Taş Çizgileri', materials: 'Dekoratif taş sıva, lazer terazi.', process: 'Sıva kurumadan önce özel mastar ve lazer yardımıyla simetrik kesik çizgiler oluşturuldu.' },
-            10: { img: 'resimler/duvar10.jpg', title: 'Oksitlenmiş Patina', materials: 'Gerçek bakır ve demir partiküllü boya, asit aktivatörü.', process: 'Tavan yüzeyine metalik boya sürüldü. Özel asit sıkılarak mavi-bronz renkli gerçek paslanma sağlandı.' }
+            "1": {
+                title: "Klasik Affresco",
+                img: "resimler/duvar1.jpg",
+                materials: "Kireç esaslı sıva, doğal pigmentler, koruyucu vaks.",
+                process: "Geleneksel İtalyan tekniklerine sadık kalınarak katman katman uygulanan klasik doku çalışması."
+            },
+            "2": {
+                title: "Modern Sanat",
+                img: "resimler/duvar2.jpg",
+                materials: "Akrilik efekt boyası, ince kumlu tekstür.",
+                process: "Minimalist mekanlar için tasarlanmış, ışık açısına göre renk değiştiren modern yüzey tasarımı."
+            },
+            "3": {
+                title: "Antik Doku",
+                img: "resimler/duvar3.jpg",
+                materials: "Eskitme patinaları, kaba dokulu harç.",
+                process: "Yılların yaşanmışlık hissini duvara aktarmak amacıyla derin çatlaklar ve eskitme efektleri içeren özel çalışma."
+            },
+            "4": {
+                title: "Rölyef ve Sanat",
+                img: "resimler/duvar4.jpg",
+                materials: "Akrilik, Özel Alçı, İç Yapı Armatürü",
+                process: "Mekana özel hazırlanan rölyef tasarımı ve yüksek kabartma duvar uygulaması."
+            },
+            "5": {
+                title: "Altın Dokunuşlar",
+                img: "resimler/duvar5.jpg",
+                materials: "İtalyan Sıva, Altın Varak",
+                process: "Katmanlı İtalyan sıva üzerine altın varak detaylarla derinlik kazandırılması."
+            },
+            "6": {
+                title: "Mural Tasarımı",
+                img: "resimler/duvar6.jpg",
+                materials: "Duvar Boyası, Akrilik",
+                process: "Duvar yüzeyine doğrudan uygulanan el yapımı sanatsal mural çizimi."
+            },
+            "7": {
+                title: "Doku Harmonisi",
+                img: "resimler/duvar7.jpg",
+                materials: "Tekstürlü Sıva, Efekt Boya",
+                process: "Yaşam alanlarına karakter katan modern ve yoğun dokulu yüzey çalışması."
+            }
         };
 
+        // URL'den hangi projenin istendiğini bulma (örn: detay.html?id=4)
         const urlParams = new URLSearchParams(window.location.search);
         const projectId = urlParams.get('id');
         const project = projects[projectId];
 
         if(project) {
-            // ARTIK ARKA PLAN DEĞİL, DİREKT RESİM OLARAK ÇAĞIRIYORUZ (BOZULMA YOK)
+            // Verileri HTML elementlerine yerleştirme
             document.getElementById('project-img-tag').src = project.img;
+            document.getElementById('project-img-tag').alt = project.title;
             document.getElementById('project-title').innerText = project.title;
             document.getElementById('project-materials').innerText = project.materials;
             document.getElementById('project-process').innerText = project.process;
@@ -126,6 +104,7 @@
             document.getElementById('project-title').innerText = "Proje Bulunamadı";
         }
 
+        // Sayfa Yüklenme Animasyon Kontrolü
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
