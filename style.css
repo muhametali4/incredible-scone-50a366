@@ -384,3 +384,42 @@ footer {
     text-align: center;
     font-weight: 300;
 }
+/* Detay Sayfası Çerçeve Düzeni */
+.detail-container {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    flex-wrap: wrap; /* Mobilde alt alta gelmesi için */
+}
+
+/* Resim Kutusu Sabitleme */
+.detail-img-box {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px; /* Resim kutusunun ekranda kaplayacağı maksimum genişlik */
+    height: 450px;    /* Kutunun yüksekliğini sabitliyoruz */
+    background-color: #f5f5f5; /* Resim yüklenirken arkada duracak temiz renk */
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Resmin Kendisini Çerçeveye Zorlama (Bozulmayı Önleme) */
+#project-img-tag {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Resmi kırpmadan/bozmadan kutunun içine tam sığdırır */
+    object-position: center; /* Resmi tam ortalayarak odaklar */
+    display: block;
+}
+
+/* Bilgi Kutusu Ayarı */
+.detail-info-box {
+    flex: 1;
+    min-width: 300px;
+}
