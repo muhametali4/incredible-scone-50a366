@@ -40,7 +40,7 @@
     </div>
 
     <script>
-        // 14 Projenin Hikaye ve Şıklık Odaklı Yeni Veri Havuzu
+        // 14 Projenin Hikaye ve Şıklık Odaklı Veri Havuzu
         const projects = {
             "1": {
                 title: "Klasik Affresco",
@@ -65,7 +65,7 @@
             "5": {
                 title: "Altın Dokunuşlar",
                 img: "resimler/duvar5.jpg",
-                story: "Mat İtalyan sıvanın derinliği ile parıldayan altın varakların kontrastından doğan lüks bir senfoni. Gün ışığında farklı, akşam aydınlatmasında farklı parıltılar sunan bu özel tasarım, uygulandığı mekana elit ve göz alıcı bir prestij katıyor."
+                story: "Mat İtalyan sıvanın derinliği ile parıldayan altın varakların kontrastından doğan lüks un senfoni. Gün ışığında farklı, akşam aydınlatmasında farklı parıltılar sunan bu özel tasarım, uygulandığı mekana elit ve göz alıcı bir prestij katıyor."
             },
             "6": {
                 title: "Mural Tasarımı",
@@ -100,4 +100,43 @@
             "12": {
                 title: "Geometrik Rölyef",
                 img: "resimler/duvar12.jpg",
-                story: "Matematiksel formların ve çizgisel düzenin sanatsal bir dışavurumu. Kusursuz simetrisi ve modern mimari çizgileri, özellikle minimalist ve kurumsal mekanlarda vizyoner ve çağ ötesi bir şıklık
+                story: "Matematiksel formların ve çizgisel düzenin sanatsal bir dışavurumu. Kusursuz simetrisi ve modern mimari çizgileri, özellikle minimalist ve kurumsal mekanlarda vizyoner ve çağ ötesi bir şıklık atmosferi yaratmak için tasarlandı."
+            },
+            "13": {
+                title: "Venedik Sıvası",
+                img: "resimler/duvar13.jpg",
+                story: "Ayna parlaklığındaki pürüzsüz yüzeyiyle lüksün en saf hallerinden biri. Işığı kusursuzca yansıtan bu asil İtalyan klasiği, derin mermer dokusu illüzyonuyla uygulandığı her duvara benzersiz bir saray zarafeti sarıyor."
+            },
+            "14": {
+                title: "Özel Tasarım Mural",
+                img: "resimler/duvar14.jpg",
+                story: "Mekanın mimari kimliği ve mobilya karakteri analiz edilerek tamamen kişiye özel kurgulanmış bir başyapıt. Sanatçının fırçasından çıkan her bir darbe, odanın odak noktasını sanatsal bir galeri lüksüne dönüştürmeyi amaçlıyor."
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('id');
+        const project = projects[projectId];
+
+        if(project) {
+            document.getElementById('project-img-tag').src = project.img;
+            document.getElementById('project-img-tag').alt = project.title;
+            document.getElementById('project-title').innerText = project.title;
+            document.getElementById('project-story').innerText = project.story;
+        } else {
+            document.getElementById('project-title').innerText = "Proje Bulunamadı";
+        }
+
+        // Hata veren eski kodlar temizlendi, animasyon artık kusursuz çalışacak
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').style.opacity = '1';
+                }, 800);
+            }, 500);
+        };
+    </script>
+</body>
+</html>
