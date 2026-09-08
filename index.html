@@ -602,5 +602,45 @@
 
     <!-- Galeri Popup Scripti -->
     <script src="gallery-modal.js"></script>
+</body><!-- Kartların Gölgeden Belirme (Scroll Reveal) Efekti -->
+    <script>
+        function updateScrollReveal() {
+            const cards = document.querySelectorAll('.showcase-card');
+            const windowHeight = window.innerHeight;
+            const viewportCenter = windowHeight / 2;
+
+            cards.forEach(card => {
+                const wrap = card.querySelector('.showcase-media-wrap');
+                if (!wrap) return;
+
+                const rect = card.getBoundingClientRect();
+                const cardCenter = rect.top + rect.height / 2;
+                const distanceToCenter = Math.abs(viewportCenter - cardCenter);
+                const maxDistance = windowHeight * 0.7;
+
+                // Kart ekran merkezine geldikçe sis azalır (0 olur), uzaklaştıkça kararır (0.85 olur)
+                let fog = distanceToCenter / maxDistance;
+                fog = Math.max(0, Math.min(0.85, fog));
+
+                // Kart merkezdeyken tam boyutuna (scale: 1.0) yaklaşır
+                let scale = 1.0 - (fog * 0.10);
+
+                wrap.style.setProperty('--dark-fog', fog.toFixed(2));
+                wrap.style.transform = `scale(${scale.toFixed(3)})`;
+
+                // Merkeze çok yakınsa odak ışıltısı ver
+                if (fog < 0.25) {
+                    card.classList.add('is-focused');
+                } else {
+                    card.classList.remove('is-focused');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateScrollReveal, { passive: true });
+        window.addEventListener('resize', updateScrollReveal);
+        document.addEventListener('DOMContentLoaded', updateScrollReveal);
+        setTimeout(updateScrollReveal, 300);
+    </script>
 </body>
 </html>
